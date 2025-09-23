@@ -41,8 +41,8 @@
           </a>
           <div class="collapse show" id="base">
             <ul class="nav nav-collapse">
-              <li class="<?php echo ($this->uri->segment(2) == 'buat_tempahan') ? 'active' : '' ?>">
-                <a href="<?php echo base_url('app/buat_tempahan');?>">
+              <li class="<?php echo ($this->uri->segment(2) == 'tempahan') ? 'active' : '' ?>">
+                <a href="<?php echo base_url('app/tempahan');?>">
                   <span class="sub-item">Buat Tempahan</span>
                 </a>
               </li>

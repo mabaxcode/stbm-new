@@ -34,6 +34,9 @@
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="<?php echo base_url(); ?>/assets/js/setting-demo.js"></script>
 <script src="<?php echo base_url(); ?>/assets/js/demo.js"></script>
+
+<!-- form validation for make reservation rooms -->
+<?php $this->load->view('validation-script/room-booking'); ?>
 <script>
   $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
     type: "line",
