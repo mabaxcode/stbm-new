@@ -49,10 +49,10 @@
         <div class="container">
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Sitem Tempahan Bilik Mesyuarat</a> -->
 
             <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a> 
+            <!-- <a class="navbar-brand logo-image"><img src="<?php echo base_url(); ?>/assets/img/kaiadmin/favicon.png" alt="alternative"></a> -->
             
             <!-- Mobile Menu Toggle Button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,11 +70,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Log Masuk</h1>
-                   <p>Anda tidak mempunyai akaun? <a class="white" href="sign-up.html">Daftar Akaun</a></p> 
+                    
+                   
                     <!-- Sign Up Form -->
+                     
                     <div class="form-container">
+                        
                         <form id="logInForm" data-toggle="validator" data-focus="false">
+                            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">STBM</a> -->
+                             
+                            <h4><a class=""><img src="<?php echo base_url(); ?>/assets/img/kaiadmin/favicon.png" alt="alternative" width="10%"></a> Sistem Tempahan Bilik Mesyuarat</h4>
+                            <label style="color:grey;font-family: nunito-light, sans-serif;">Sila log masuk untuk meneruskan.</label>
+                            <br><br>
                             <div class="form-group">
                                 <input type="email" class="form-control-input" id="lemail" required>
                                 <label class="label-control" for="lemail">Email</label>
@@ -88,9 +95,10 @@
                             <div class="form-group">
                                 <button type="submit" class="form-control-submit-button">LOG MASUK</button>
                             </div>
-                            <div class="form-message">
+                            <p style="color:grey; text-align: center; font-family: nunito-light, sans-serif;">Anda tidak mempunyai akaun? <a class="blue" href="<?php echo base_url('welcome/register'); ?>">Daftar di sini</a> </p> 
+                            <!-- <div class="form-message">
                                 <div id="lmsgSubmit" class="h3 text-center hidden"></div>
-                            </div>
+                            </div> -->
                         </form>
                     </div> <!-- end of form container -->
                     <!-- end of sign up form -->

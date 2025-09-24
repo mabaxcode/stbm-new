@@ -1584,8 +1584,8 @@ a:hover.back-to-top {
 /****************************************/
 .ex-2-header {
 	padding-top: 9rem;
-	background-color: #5f4dee;
-	text-align: center;
+	background-color: #f2f2f8;
+	/* text-align: center; */
 	min-height: 100vh;
 }
 
@@ -1602,12 +1602,12 @@ a:hover.back-to-top {
 }
 
 .ex-2-header .form-container {
-	max-width: 26rem;
+	max-width: 30rem;
 	margin-right: auto;
 	margin-left: auto;
 	padding: 2.25rem 1.25rem 1.25rem 1.25rem;
 	border-radius: 0.5rem;
-	background-color: #f3f7fd;
+	background-color: #ffffff;
 }
 
 .ex-2-header .checkbox {
