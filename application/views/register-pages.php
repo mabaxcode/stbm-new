@@ -76,26 +76,31 @@
                      
                     <div class="form-container">
                         
-                        <form id="logInForm" data-toggle="validator" data-focus="false">
+                        <form id="registerForm" data-toggle="validator" data-focus="false">
                             <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">STBM</a> -->
                              
                             <h4><a class=""><img src="<?php echo base_url(); ?>/assets/img/kaiadmin/favicon.png" alt="alternative" width="10%"></a> Sistem Tempahan Bilik Mesyuarat</h4>
-                            <label style="color:grey;font-family: nunito-light, sans-serif;">Sila log masuk untuk meneruskan.</label>
+                            <label style="color:grey;font-family: nunito-light, sans-serif;">Sila isi semua maklumat berikut untuk mendaftar akaun</label>
                             <br><br>
                             <div class="form-group">
-                                <input type="email" class="form-control-input" id="lemail" required>
+                                <input type="text" class="form-control-input" id="rname" name="name" required>
+                                <label class="label-control" for="lemail">Nama</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control-input" name="email" id="remail" required>
                                 <label class="label-control" for="lemail">Email</label>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control-input" id="lpassword" required>
+                                <input type="password" class="form-control-input" name="password" id="rpassword" required>
                                 <label class="label-control" for="lpassword">Kata Laluan</label>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control-submit-button">LOG MASUK</button>
+                                <button type="submit" class="form-control-submit-button">DAFTAR</button>
                             </div>
-                            <p style="color:grey; text-align: center; font-family: nunito-light, sans-serif;">Anda tidak mempunyai akaun? <a class="blue" href="<?php echo base_url('register'); ?>">Daftar di sini</a> </p> 
+                            <p style="color:grey; text-align: center; font-family: nunito-light, sans-serif;">Sudah mempunyai akaun? <a class="blue" href="<?php echo base_url(); ?>">Log masuk</a> </p> 
                             <div class="form-message">
                                 <div id="lmsgSubmit" class="h3 text-center hidden"></div>
                             </div>
@@ -118,12 +123,12 @@
     <script src="<?php echo base_url(); ?>login-assets/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
     <script src="<?php echo base_url(); ?>login-assets/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
     <script src="<?php echo base_url(); ?>login-assets/js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
-    <?/* <script src="<?php echo base_url(); ?>login-assets/js/scripts.js"></script> <!-- Custom scripts --> */?>
+    <?/*php <script src="<?php echo base_url(); ?>login-assets/js/scripts.js"></script>  */?>
 
     <script>
 
         var base_url = "<?php echo base_url(); ?>";
-        
+
         (function($) {
             "use strict"; 
             
@@ -280,7 +285,7 @@
                 if (event.isDefaultPrevented()) {
                     // handle the invalid form...
                     sformError();
-                    ssubmitMSG(false, "Please fill all fields!");
+                    // ssubmitMSG(false, "Please fill all fields!");
                 } else {
                     // everything looks good!
                     event.preventDefault();
@@ -337,7 +342,7 @@
                 if (event.isDefaultPrevented()) {
                     // handle the invalid form...
                     lformError();
-                    lsubmitMSG(false, "Please fill all fields!");
+                    // lsubmitMSG(false, "Please fill all fields!");
                 } else {
                     // everything looks good!
                     event.preventDefault();
@@ -352,18 +357,14 @@
                 
                 $.ajax({
                     type: "POST",
-                    url: base_url + "auth/login",
-                    dataType:"json",
+                    url: "php/loginform-process.php",
                     data: "email=" + email + "&password=" + password, 
-                    success: function(data) {
-                        console.log(data);
-                        if (data.result == true) {
-                            // lformSuccess();
-                            window.location.href = data.redirect;
+                    success: function(text) {
+                        if (text == "success") {
+                            lformSuccess();
                         } else {
-                            // lformError();
-                            // lsubmitMSG(false, data);
-                            lCustomformErr(data.message);
+                            lformError();
+                            lsubmitMSG(false, text);
                         }
                     }
                 });
@@ -372,12 +373,6 @@
             function lformSuccess() {
                 $("#logInForm")[0].reset();
                 lsubmitMSG(true, "Log In Submitted!");
-                $("input").removeClass('notEmpty'); // resets the field label after submission
-            }
-
-            function lCustomformErr(msg) {
-                $("#logInForm")[0].reset();
-                lsubmitMSG(true, msg);
                 $("input").removeClass('notEmpty'); // resets the field label after submission
             }
 
@@ -402,7 +397,7 @@
                 if (event.isDefaultPrevented()) {
                     // handle the invalid form...
                     nformError();
-                    nsubmitMSG(false, "Please fill all fields!");
+                    // nsubmitMSG(false, "Please fill all fields!");
                 } else {
                     // everything looks good!
                     event.preventDefault();
@@ -456,7 +451,7 @@
                 if (event.isDefaultPrevented()) {
                     // handle the invalid form...
                     pformError();
-                    psubmitMSG(false, "Please fill all fields!");
+                    // psubmitMSG(false, "Please fill all fields!");
                 } else {
                     // everything looks good!
                     event.preventDefault();
@@ -527,16 +522,65 @@
             });
 
             function lsubmitMSG(valid, msg) {
-                if (valid) {
-                    var msgClasses = "h3 text-center tada animated";
-                } else {
-                    var msgClasses = "h3 text-center";
+                    if (valid) {
+                        var msgClasses = "h3 text-center tada animated";
+                    } else {
+                        var msgClasses = "h3 text-center";
+                    }
+                    $("#lmsgSubmit").removeClass().addClass(msgClasses).text(msg);
                 }
-                $("#lmsgSubmit").removeClass().addClass(msgClasses).text(msg);
-            }
+
+                $("#registerForm").validator().on("submit", function(event) {
+                    if (event.isDefaultPrevented()) {
+                        // handle the invalid form...
+                        rformError();
+                        // lsubmitMSG(false, "Please fill all fields!");
+                    } else {
+                        // everything looks good!
+                        event.preventDefault();
+                        rsubmitForm();
+                    }
+                });
+
+                function rformError() {
+                    $("#registerForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                        $(this).removeClass();
+                    });
+                }
+
+                function rsubmitForm() {
+
+                    // initiate variables with form content
+                    var email       = $("#remail").val();
+                    var name        = $("#rname").val();
+                    var password    = $("#rpassword").val();
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: base_url + "auth/register",
+                        dataType: "json",
+                        data: "email=" + email + "&password=" + password + "&name=" + name, 
+                        success: function(data) {
+                            console.log(data);
+                            if (data.result === true) {
+                                rformSuccess(data.message);
+                            } else {
+                                lformError();
+                                lsubmitMSG(false, data.result);
+                            }
+                        }
+                    });
+                }
+
+                function rformSuccess(msg) {
+                    $("#registerForm")[0].reset();
+                    lsubmitMSG(true, msg);
+                    $("input").removeClass('notEmpty'); // resets the field label after submission
+                }
 
         })(jQuery);
 
     </script>
+
 </body>
 </html>

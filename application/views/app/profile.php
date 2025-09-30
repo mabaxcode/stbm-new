@@ -1,6 +1,6 @@
 <div class="page-inner">
   <div class="page-header">
-    <h3 class="fw-bold mb-3">Buat Tempahan</h3>
+    <h3 class="fw-bold mb-3">Profile</h3>
     <ul class="breadcrumbs mb-3">
       <li class="nav-home">
         <a href="#">
@@ -17,7 +17,7 @@
         <i class="icon-arrow-right"></i>
       </li>
       <li class="nav-item">
-        <a href="#">Buat Tempahan</a>
+        <a href="#">Profile Saya</a>
       </li>
     </ul>
   </div>
@@ -28,12 +28,8 @@
         </div>
     <?php endif; ?>
 
-    <div class="col-md-4">
-      <?php $this->load->view('app/component/borang-tempahan'); ?>
-    </div>
-
-    <div class="col-md-8">
-      <div id='calendar'></div>
+    <div class="col-md-12">
+      <?php $this->load->view('app/component/my-profile'); ?>
     </div>
 
   </div>

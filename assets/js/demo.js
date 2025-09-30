@@ -190,18 +190,18 @@ Circles.create({
 })
 
 //Notify
-$.notify({
-	icon: 'icon-bell',
-	title: 'Selamat Datang !',
-	message: 'Sistem Tempahan Bilik Mesyuarat',
-},{
-	type: 'secondary',
-	placement: {
-		from: "top",
-		align: "right"
-	},
-	time: 1000,
-});
+// $.notify({
+// 	icon: 'icon-bell',
+// 	title: 'Selamat Datang !',
+// 	message: 'Sistem Tempahan Bilik Mesyuarat',
+// },{
+// 	type: 'secondary',
+// 	placement: {
+// 		from: "top",
+// 		align: "right"
+// 	},
+// 	time: 1000,
+// });
 
 // Jsvectormap
 var world_map = new jsVectorMap({

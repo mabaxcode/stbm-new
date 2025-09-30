@@ -27,6 +27,7 @@ $(document).ready(function() {
           $("#submitBtn").prop("disabled", true).text("Prosessing...");
         },
         success: function(response) {
+          console.log(response);
           if (response.status === "success") {
             $.notify({
               icon: 'icon-bell',
@@ -35,7 +36,7 @@ $(document).ready(function() {
             },{
               type: 'success',
               placement: {
-                from: "bottom",
+                from: "top",
                 align: "right"
               },
               time: 1000,
@@ -43,7 +44,18 @@ $(document).ready(function() {
             $("#tempahanForm")[0].reset(); // clear form
             $(".error").text("");          // clear errors
           } else {
-            alert("❌ Gagal simpan tempahan.");
+            $.notify({
+              icon: 'icon-bell',
+              title: 'Gagal !',
+              message: response.message,
+            },{
+              type: 'danger',
+              placement: {
+                from: "top",
+                align: "right"
+              },
+              time: 1000,
+            });
           }
         },
         error: function(xhr, status, error) {

@@ -1,8 +1,4 @@
-/* Template: Tivo - SaaS App HTML Landing Page Template
-   Author: Inovatik
-   Created: Sep 2019
-   Description: Custom JS file
-*/
+
 
 
 (function($) {
@@ -397,4 +393,60 @@
 		$(this).blur();
 	});
 
+    function lsubmitMSG(valid, msg) {
+            if (valid) {
+                var msgClasses = "h3 text-center tada animated";
+            } else {
+                var msgClasses = "h3 text-center";
+            }
+            $("#lmsgSubmit").removeClass().addClass(msgClasses).text(msg);
+        }
+
+        $("#registerForm").validator().on("submit", function(event) {
+            if (event.isDefaultPrevented()) {
+                // handle the invalid form...
+                rformError();
+                lsubmitMSG(false, "Please fill all fields!");
+            } else {
+                // everything looks good!
+                event.preventDefault();
+                rsubmitForm();
+            }
+        });
+
+        function rformError() {
+            $("#registerForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                $(this).removeClass();
+            });
+        }
+
+        function rsubmitForm() {
+
+            // initiate variables with form content
+            var email       = $("#remail").val();
+            var name        = $("#rname").val();
+            var password    = $("#rpassword").val();
+            
+            $.ajax({
+                type: "POST",
+                url: "http://stbm.test/auth/register",
+                data: "email=" + email + "&password=" + password + "&name=" + name, 
+                success: function(data) {
+                    if (data == "success") {
+                        rformSuccess();
+                    } else {
+                        lformError();
+                        lsubmitMSG(false, data);
+                    }
+                }
+            });
+        }
+
+        function rformSuccess() {
+            $("#registerForm")[0].reset();
+            lsubmitMSG(true, "Pendaftaran berjaya!");
+            $("input").removeClass('notEmpty'); // resets the field label after submission
+        }
+
 })(jQuery);
+

@@ -200,6 +200,30 @@ function convert_date($dateTime){
 
 }
 
+function date_time_am_pm($datetime) {
+    return date("d-m-Y h:i A", strtotime($datetime));
+}
+
+function status_span_class($status) {
+    // $status = strtolower($status);
+    $class = '';
+    switch ($status) {
+        case 'Dalam Proses':
+            $class = 'badge badge-warning';
+            break;
+        case 'Lulus':
+            $class = 'badge badge-success';
+            break;
+        case 'Batal':
+            $class = 'badge badge-danger';
+            break;
+        default:
+            $class = 'badge badge-secondary';
+            break;
+    }
+    return "<span class='{$class}'>" . ucfirst($status) . "</span>";
+}
+
 
 
 
