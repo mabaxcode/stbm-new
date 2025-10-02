@@ -73,7 +73,7 @@
           </ul>
         </li>
         <li class="nav-item topbar-icon dropdown hidden-caret">
-          <a
+          <!-- <a
             class="nav-link dropdown-toggle"
             href="#"
             id="messageDropdown"
@@ -83,7 +83,7 @@
             aria-expanded="false"
           >
             <i class="fa fa-envelope"></i>
-          </a>
+          </a> -->
           <ul
             class="dropdown-menu messages-notif-box animated fadeIn"
             aria-labelledby="messageDropdown"
@@ -242,14 +242,14 @@
           </ul>
         </li>
         <li class="nav-item topbar-icon dropdown hidden-caret">
-          <a
+          <!-- <a
             class="nav-link"
             data-bs-toggle="dropdown"
             href="#"
             aria-expanded="false"
           >
             <i class="fas fa-layer-group"></i>
-          </a>
+          </a> -->
           <div class="dropdown-menu quick-actions animated fadeIn">
             <div class="quick-actions-header">
               <span class="title mb-1">Quick Actions</span>
@@ -329,14 +329,14 @@
           >
             <div class="avatar-sm">
               <img
-                src="<?php echo base_url(); ?>/assets/img/profile.jpg"
+                src="<?php echo base_url(); ?>/assets/img/default-user.png"
                 alt="..."
                 class="avatar-img rounded-circle"
               />
             </div>
             <span class="profile-username">
               <span class="op-7">Hi,</span>
-              <span class="fw-bold">Hizrian</span>
+              <span class="fw-bold"><?php echo ucfirst($this->session->userdata('user_name')); ?></span>
             </span>
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -345,14 +345,14 @@
                 <div class="user-box">
                   <div class="avatar-lg">
                     <img
-                      src="<?php echo base_url(); ?>/assets/img/profile.jpg"
+                      src="<?php echo base_url(); ?>/assets/img/default-user.png"
                       alt="image profile"
                       class="avatar-img rounded"
                     />
                   </div>
                   <div class="u-text">
-                    <h4>Hizrian</h4>
-                    <p class="text-muted">hello@example.com</p>
+                    <h4><?php echo strtoupper($this->session->userdata('user_name')); ?></h4>
+                    <p class="text-muted"><?php echo $this->session->userdata('user_email'); ?></p>
                     <?php
                     /*
                     <a
@@ -367,10 +367,11 @@
               <li>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url('app/profile'); ?>">Profile</a>
-                <a class="dropdown-item" href="#">My Balance</a>
-                <a class="dropdown-item" href="#">Inbox</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Account Setting</a>
+                <!-- <a class="dropdown-item" href="#">My Balance</a> -->
+                <!-- <a class="dropdown-item" href="#">Inbox</a> -->
+                 <a class="dropdown-item" href="<?php echo base_url('app/kemaskini_profile'); ?>">Account Setting</a>
+                <!-- <div class="dropdown-divider"></div> -->
+                
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url('auth/logout') ?>">Logout</a>
               </li>

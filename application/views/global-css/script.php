@@ -213,7 +213,7 @@
         dataType: "json",
         success: function (response) {
             if (response.success) {
-                swal("Success!", response.message, "success").then(() => {
+                swal("Berjaya!", response.message, "success").then(() => {
                     window.location.href = base_url + 'app/permohonan';
                 });
             } else {
@@ -221,6 +221,224 @@
             }
         },
     });
+  });
+
+
+  // document.querySelector(".btn-update-profile").addEventListener("click", function () {
+  $(".btn-update-profile").click(function (e) {
+    e.preventDefault();
+
+      // console.log('x');
+      let fullname = document.getElementById("nama").value.trim();
+
+      // console.log(fullname);
+      
+      let email = document.getElementById("email").value.trim();
+      let phone_no = document.getElementById("phone_no").value.trim();
+      let designation = document.getElementById("designation").value.trim();
+      let department_name = document.getElementById("department_name").value.trim();
+      // let form = document.getElementById("updateProfileForm");
+
+      // clear previous errors
+      document.getElementById("nama-error").innerText = "";
+      document.getElementById("email-error").innerText = "";
+      document.getElementById("phone_no-error").innerText = "";
+      document.getElementById("designation-error").innerText = "";
+      document.getElementById("department_name-error").innerText = "";
+
+      // let errors = [];
+      let isValid = true;
+
+      if (fullname === "") {
+          // errors.push("Sila masukkan nama.");
+          console.log('xx');
+          document.getElementById("nama-error").innerText = "Sila masukkan nama.";
+          isValid = false;
+      }
+
+      if (email === "") {
+          // errors.push("Sila masukkan email.");
+          document.getElementById("email-error").innerText = "Sila masukkan email.";
+          isValid = false;
+      } else {
+          // simple email regex
+          let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+          if (!email.match(emailPattern)) {
+              //errors.push("Sila masukkan email yang sah.");
+              document.getElementById("email-error").innerText = "Sila masukkan email yang sah.";
+              isValid = false;
+          }
+      }
+
+      if (phone_no === "") {
+          // errors.push("Sila masukkan nombor telefon.");
+          document.getElementById("phone_no-error").innerText = "Sila masukkan nombor telefon.";
+          isValid = false;
+      }
+
+      if (designation === "") {
+          // errors.push("Sila masukkan nombor telefon.");
+          document.getElementById("designation-error").innerText = "Sila masukkan jawatan.";
+          isValid = false;
+      }
+
+      if (department_name === "") {
+          // errors.push("Sila masukkan nombor telefon.");
+          document.getElementById("department_name-error").innerText = "Sila masukkan jabatan.";
+          isValid = false;
+      }
+
+      // if (errors.length > 0) {
+      //     alert(errors.join("\n")); // show all errors
+      // } else {
+      //     // if valid, submit form
+      //     // document.getElementById("updateProfileForm").submit();
+      //     form.submit();
+      // }
+
+      // if (isValid) {
+      //     let btn = $(".btn-update-profile");
+      //     // document.getElementById("updateProfileForm").submit();
+      //     $.ajax({
+      //       url: base_url + "app/kemaskini_profile_proses",
+      //       type: "POST",
+      //       data: $("#updateProfileForm").serialize(),
+      //       dataType: "json",
+      //       success: function (response) {
+      //           // console.log(response);
+      //           if (response.status == true) {
+      //               swal("Berjaya!", response.message, "success").then(() => {
+      //                   // window.location.href = base_url + 'app/permohonan';
+      //                   location.reload();
+      //               });
+      //           } else {
+      //               swal("Error!", response.message, "error");
+      //           }
+      //       },
+      //   });
+      // }
+
+      if (isValid) {
+        let btn = $(".btn-update-profile");
+
+        $.ajax({
+            url: base_url + "app/kemaskini_profile_proses",
+            type: "POST",
+            data: $("#updateProfileForm").serialize(),
+            dataType: "json",
+            beforeSend: function () {
+                // disable button & show processing text
+                btn.prop("disabled", true).text("Prosessing...");
+            },
+            success: function (response) {
+                if (response.status == true) {
+                    swal("Berjaya!", response.message, "success").then(() => {
+                        location.reload();
+                    });
+                } else {
+                    swal("Error!", response.message, "error");
+                }
+            },
+            error: function () {
+                swal("Error!", "Something went wrong. Please try again.", "error");
+            },
+            complete: function () {
+                // re-enable button & restore text
+                btn.prop("disabled", false).text("Kemaskini");
+            }
+        });
+    }
+
+  });
+
+  $(".btn-update-password").click(function (e) {
+    e.preventDefault();
+
+      // console.log('x');
+      let current_password = document.getElementById("current_password").value.trim();      
+      let new_password = document.getElementById("new_password").value.trim();
+      let c_new_password = document.getElementById("c_new_password").value.trim();
+
+      // clear previous errors
+      document.getElementById("current_password-error").innerText = "";
+      document.getElementById("new_password-error").innerText = "";
+      document.getElementById("c_new_password-error").innerText = "";
+
+      // let errors = [];
+      let isValid = true;
+
+      if (current_password === "") {
+          // errors.push("Sila masukkan nama.");
+          document.getElementById("current_password-error").innerText = "Sila masukkan kata laluan sekarang.";
+          isValid = false;
+      }
+
+      if (new_password === "") {
+          // errors.push("Sila masukkan email.");
+          document.getElementById("new_password-error").innerText = "Sila masukkan kata laluan baru.";
+          isValid = false;
+      }
+
+      if (c_new_password === "") {
+          // errors.push("Sila masukkan nombor telefon.");
+          document.getElementById("c_new_password-error").innerText = "Sila sahkan kata laluan baru.";
+          isValid = false;
+      }else if (new_password !== c_new_password) {
+        document.getElementById("c_new_password-error").innerText = "Kata laluan tidak sama. Sila sahkan semula";
+        isValid = false;
+      }
+
+      // if (isValid) {
+      //     // document.getElementById("updateProfileForm").submit();
+      //     $.ajax({
+      //       url: base_url + "app/update_password",
+      //       type: "POST",
+      //       data: $("#updatePasswordForm").serialize(),
+      //       dataType: "json",
+      //       success: function (response) {
+      //           // console.log(response);
+      //           if (response.status == true) {
+      //               swal("Berjaya!", response.message, "success").then(() => {
+      //                   // window.location.href = base_url + 'app/permohonan';
+      //                   location.reload();
+      //               });
+      //           } else {
+      //               swal("Error!", response.message, "error");
+      //           }
+      //       },
+      //   });
+      // }
+
+      if (isValid) {
+        let btn = $(".btn-update-password");
+
+        $.ajax({
+            url: base_url + "app/update_password",
+            type: "POST",
+            data: $("#updatePasswordForm").serialize(),
+            dataType: "json",
+            beforeSend: function () {
+                // disable button & show processing text
+                btn.prop("disabled", true).text("Prosessing...");
+            },
+            success: function (response) {
+                if (response.status == true) {
+                    swal("Berjaya!", response.message, "success").then(() => {
+                        location.reload();
+                    });
+                } else {
+                    swal("Error!", response.message, "error");
+                }
+            },
+            error: function () {
+                swal("Error!", "Something went wrong. Please try again.", "error");
+            },
+            complete: function () {
+                // re-enable button & restore text
+                btn.prop("disabled", false).text("Kemaskini");
+            }
+        });
+    }
   });
 
 

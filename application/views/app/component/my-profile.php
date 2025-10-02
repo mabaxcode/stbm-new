@@ -2,7 +2,7 @@
 <div class="card card-profile">
     <div
     class="card-header"
-    style="background-image: url('assets/img/blogpost.jpg')"
+    style="background-image: url('<?php echo base_url('assets/img/blogpost.jpg'); ?>')"
     >
     <div class="profile-picture">
         <div class="avatar avatar-xl">
@@ -22,7 +22,7 @@
         
         <div class="view-profile">
         <a 
-        href="#" 
+        href="<?php echo base_url('app/kemaskini_profile') ?>" 
         class="btn btn-secondary">
         <i class="fa fa-edit"></i>
         Kemaskini Profile
@@ -38,7 +38,7 @@
         </div>
         <div class="col">
         <div class="number">Status</div>
-        <div class="title">Aktif</div>
+        <div class="title"><span class="badge badge-success">Aktif</span></div>
         </div>
         <div class="col">
         <div class="number">Peranan</div>

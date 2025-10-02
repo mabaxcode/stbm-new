@@ -38,6 +38,41 @@ class App extends CI_Controller {
 		$this->load->view('app/pages', $data);
 	}
 
+	public function kemaskini_profile()
+	{
+		$data['content']    = 'app/kemaskini-profile';
+		$data['user'] = $this->MeetingRoom_model->get_user_booking($this->session->userdata('user_id'));
+		$data['user_info'] = $this->MeetingRoom_model->get_user_info($this->session->userdata('user_id'));
+
+		$this->load->view('app/pages', $data);
+	}
+
+	public function kemaskini_profile_proses()
+	{
+		$post = $this->input->post();
+		// echo "<pre>"; print_r($post); echo "</pre>";
+
+		$update = $this->MeetingRoom_model->update_profile($post);
+		echo json_encode([
+			'status' => true,
+			'message' => 'Maklumat profile berjaya dikemaskini.'
+		]);
+		return;
+	}
+
+	public function update_password()
+	{
+		$post = $this->input->post();
+		// echo "<pre>"; print_r($post); echo "</pre>";exit;
+
+		$update = $this->MeetingRoom_model->update_password($post);
+		echo json_encode([
+			'status' => $update['status'],
+			'message' => $update['message']
+		]);
+		return;
+	}
+
 	public function mybooking($data=false)
 	{
 		$data['content']      = 'app/tempahan-saya';

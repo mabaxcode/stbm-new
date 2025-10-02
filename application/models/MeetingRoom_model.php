@@ -124,5 +124,47 @@ class MeetingRoom_model extends CI_Model {
         return $this->db->get()->row_array();
     }
 
+    public function update_profile($data)
+    {
+
+        // echo "<pre>"; print_r($data); echo "</pre>";exit;
+        $this->db->where('id', $data['user_id']);
+        $this->db->update('users', [
+            'name'     => $data['name'],
+            'email' => $data['email'],
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        $this->db->where('user_id', $data['user_id']);
+        $this->db->update('user_info', [
+            'department_name'     => $data['department_name'],
+            'designation' => $data['designation'],
+            'phone_no' => $data['phone_no'],
+        ]);
+    }
+
+    public function update_password($post)
+    {
+        # check current password
+        $hashedPassword = password_hash($post['new_password'], PASSWORD_BCRYPT);
+
+        $query = $this->db->get_where('users', ['id' => $post['user_id']]);
+        $user = $query->row();
+
+        if (!$user) {
+            return ['status' => false, 'message' => 'User not found.'];
+        }
+
+        if (!password_verify($post['current_password'], $user->password)) {
+            return ['status' => false, 'message' => 'Kata laluan sekarang tidak tepat.'];
+        }
+
+        $this->db->where('id', $post['user_id']);
+        $this->db->update('users', ['password' => $hashedPassword]);
+
+        return ['status' => true, 'message' => 'Kata laluan anda berjaya dikemaskini.'];
+        
+    }
+
 }
 ?>
