@@ -231,4 +231,13 @@ class App extends CI_Controller {
 		$this->load->view('app/pages', $data);
 	}
 
+	public function bilik_mesyuarat()
+	{
+		$data['content']    = 'app/bilik-mesyuarat';
+		// $data['add_script'] = 'global-js/calendar-script';
+		$data['bilik_mesyuarat'] = $this->MeetingRoom_model->get_all();
+		
+		$this->load->view('app/pages', $data);
+	}
+
 }

@@ -58,6 +58,7 @@
                   <span class="sub-item">Tempahan Saya</span>
                 </a>
               </li>
+              
               <?php endif; ?>
 
               <!-- admin menu -->
@@ -81,6 +82,18 @@
             </ul>
           </div>
         </li>
+        
+
+        <?php if($this->session->userdata('user_role') == "user"): ?>
+          <li class="<?php echo ($this->uri->segment(2) == 'bilik_mesyuarat') ? 'active' : '' ?> nav-item">
+            <a href="<?php echo base_url('app/bilik_mesyuarat'); ?>">
+              <i class="fas fa-layer-group"></i>
+              <p>Bilik Mesyuarat</p>
+              <span class="badge badge-secondary">1</span>
+            </a>
+          </li>
+        <?php endif; ?>
+
       </ul>
     </div>
   </div>

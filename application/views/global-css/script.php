@@ -441,5 +441,42 @@
     }
   });
 
+  // Click event
+  $(".carian-bilik").on("click", function() {
+      carianBilik();
+  });
+
+  // Enter key event
+  $("#carian_bilik_val").keypress(function(e) {
+      if (e.key === "Enter") {
+          e.preventDefault();
+          carianBilik();
+      }
+  });
+
+  function carianBilik() {
+      let keyword = $("#carian_bilik_val").val().trim();
+
+      if (keyword === "") {
+          $("#result").html("<p class='text-danger'>Sila pilih nama bilik.</p>");
+          return;
+      }
+
+      $.ajax({
+          url: base_url + "app/carian_bilik", // <-- ganti dgn endpoint controller anda
+          type: "POST",
+          data: { nama_bilik: keyword },
+          beforeSend: function() {
+              $("#result").html("<p>Sedang mencari...</p>");
+          },
+          success: function(response) {
+              // Backend return HTML directly
+              $("#result").html(response);
+          },
+          error: function() {
+              $("#result").html("<p class='text-danger'>Ralat ketika memuatkan data.</p>");
+          }
+      });
+  }
 
 </script>

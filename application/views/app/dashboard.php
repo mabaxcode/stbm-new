@@ -3,12 +3,12 @@
     class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
   >
     <div>
-      <h3 class="fw-bold mb-3">Dashboard</h3>
-      <h6 class="op-7 mb-2">Free Bootstrap 5 Admin Dashboard</h6>
+      <h3 class="fw-bold mb-3">Utama</h3>
+      <h6 class="op-7 mb-2">Sistem Tempahan Bilik Mesyuarat</h6>
     </div>
     <div class="ms-md-auto py-2 py-md-0">
-      <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-      <a href="#" class="btn btn-primary btn-round">Add Customer</a>
+      <a href="<?php echo base_url('app/mybooking'); ?>" class="btn btn-label-info btn-round me-2">Tempahan Saya</a>
+      <a href="<?php echo base_url('app/tempahan'); ?>" class="btn btn-primary btn-round">Buat Tempahan</a>
     </div>
   </div>
   <div class="row">

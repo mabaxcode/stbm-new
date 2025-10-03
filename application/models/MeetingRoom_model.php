@@ -1,8 +1,12 @@
 <?php
 class MeetingRoom_model extends CI_Model {
     public function get_all() {
-        return $this->db->get('meeting_rooms')->result_array();
-    }
+            return $this->db
+                ->where('status', '1')
+                ->get('meeting_rooms')
+                ->result_array();
+        }
+
 
     public function check_overlap($room_id, $start_time, $end_time) {
         $this->db->where('meeting_room_id', $room_id);
